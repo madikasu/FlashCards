@@ -8,9 +8,18 @@
         <h1><p class='text-right'><strong><u>{{vm.card.op}}{{vm.card.b}}</u></strong></p></h1>
       </div>
     </div>
+
     <div class='row'>
-      <input type='text' class='form-control' ng-model='vm.answer'>
+      <form>
+        <input type='text' class='form-control' ng-model='vm.answer' ng-model-options='{ debounce: 300 }' />
+      </form>
     </div>
   </div>
 
+</div>
+<div class="alert alert-success" role="alert" ng-show="vm.success">
+  <strong>Well done!</strong>
+</div>
+<div class="alert alert-danger" role="alert" ng-show="vm.fail">
+  <strong>Try again</strong>
 </div>
