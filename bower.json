@@ -1,0 +1,7 @@
+{
+  "name": "FlashCards",
+  "dependencies": {
+    "lodash": "~3.4.0"
+  },
+  "devDependencies": {}
+}
