@@ -53,7 +53,7 @@
           vm.card.validate(newValue) ? success() : fail();
         }
       }
-    };
+    }
 
     $scope.$watch(
       function () {
@@ -61,10 +61,10 @@
       },
       validate);
 
-  };
+  }
 
   CardsController.prototype.generateCards = function () {
     return this._cardService.generateCards(1, 10, '+', 1);
-  }
+  };
 
 })();
