@@ -5,21 +5,28 @@
     .service('CardGeneratorService', CardGeneratorService);
 
 
-  CardGeneratorService.$inject = [];
+  CardGeneratorService.$inject = ['_', 'AdditionFactsGeneratorService'];
 
-  function CardGeneratorService() {
+  function CardGeneratorService(_, AdditionFactsGeneratorService) {
     function randomIntFromInterval(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min);
-    };
+    }
 
     function generateCards(min, max, op, numCards) {
       var _this = this;
 
-      return _.times(numCards, function () {
-        var a = randomIntFromInterval(1, 10);
-        var b = randomIntFromInterval(1, 10);
-        return new Card(a, b, op);
+      var levelFacts = AdditionFactsGeneratorService.generateFactsForLevel('B');
+
+      var cards = _.map(levelFacts.facts, function (fact) {
+        return new Card(fact[0], fact[1], levelFacts.op);
       });
+      return _.shuffle(cards);
+
+      //      return _.times(numCards, function () {
+      //        var a = randomIntFromInterval(1, 10);
+      //        var b = randomIntFromInterval(1, 10);
+      //        return new Card(a, b, op);
+      //      });
     }
 
 
@@ -28,7 +35,7 @@
     };
 
 
-  };
+  }
 
 
   var Card = (function () {
@@ -41,21 +48,21 @@
 
       this.operators = {
         '+': function (a, b) {
-          return a + b
+          return a + b;
         },
         '-': function (a, b) {
-          return a - b
+          return a - b;
         }
       };
     }
 
     Card.prototype.validate = function (input) {
       return +(input) === this.calculate();
-    }
+    };
 
     Card.prototype.calculate = function () {
       return this.operators[this.op](this.a, this.b);
-    }
+    };
 
     return Card;
 

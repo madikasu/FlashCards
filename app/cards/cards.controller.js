@@ -27,8 +27,12 @@
       vm.timeout = $timeout(function () {
         vm.answer = null;
         vm._index += 1;
-        vm.cards = vm.generateCards();
-        vm.card = vm.cards[0];
+        if (vm._index >= vm.cards.length) {
+          vm.cards = vm.generateCards();
+          vm._index = 0;
+        }
+
+        vm.card = vm.cards[vm._index];
         vm.success = false;
       }, 1000);
     }
@@ -50,7 +54,11 @@
           if (vm.timeout) {
             $timeout.cancel(vm.timeout);
           }
-          vm.card.validate(newValue) ? success() : fail();
+          if (vm.card.validate(newValue)) {
+            success();
+          } else {
+            fail();
+          }
         }
       }
     }
