@@ -12,10 +12,10 @@
       return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
-    function generateCards(min, max, op, numCards) {
+    function generateCards(min, max, op, level) {
       var _this = this;
 
-      var levelFacts = AdditionFactsGeneratorService.generateFactsForLevel('B');
+      var levelFacts = AdditionFactsGeneratorService.generateFactsForLevel(level);
 
       var cards = _.map(levelFacts.facts, function (fact) {
         return new Card(fact[0], fact[1], levelFacts.op);

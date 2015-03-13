@@ -1,4 +1,11 @@
-<div class='row starter-template'>
+<div>
+  <h1><strong>Current Level:</strong> {{ vm.getCurrentLevel() }}</h1>
+  <button class="btn btn-default" ng-click="vm.prevLevel()" ng-disabled="!vm.canPrevLevel()">Easier</button>
+  <button class="btn btn-primary" ng-click="vm.nextLevel()" ng-disabled="!vm.canNextLevel()">Harder</button>
+</div>
+
+
+ <div class='row starter-template'>
   <div class='col-sm-2'>
     <div>
       <div class='row'>

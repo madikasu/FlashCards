@@ -6,6 +6,10 @@
 
   AdditionFactsGeneratorService.$inject = ['_'];
 
+  function randomIntFromInterval(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+  
   function AdditionFactsGeneratorService(_) {
 
 
@@ -93,6 +97,12 @@
       _.forEach(toUse, function (n) {
         var fact = facts[n];
         _.forEach(fact, function (f) {
+          if(f[0] == "*"){
+            f[0] = randomIntFromInterval(0,9);
+          }
+          if(f[1] == "*") {
+            f[1] = randomIntFromInterval(0,9);
+          }
           arr.push(f);
           if (f[0] !== f[1]) {
             arr.push([f[1], f[0]]);
@@ -102,7 +112,8 @@
 
       return {
         op: op,
-        facts: arr
+        facts: arr,
+        level: level
       };
 
     }
